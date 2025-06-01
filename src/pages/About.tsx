@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import studio from '@/assest/videos/studio.webm'; // Assuming you have a studio image in your assets
 
 const About = () => {
   const [isMuted, setIsMuted] = useState(true);
@@ -54,7 +55,7 @@ const About = () => {
           loop 
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4" />
+          <source src={studio} type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/50" />
         

@@ -7,6 +7,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
+import center from '@/assest/images/center.jpeg'; 
+import left from '@/assest/images/left.jpeg';
+import right from '@/assest/images/right.jpeg';
 
 const Home = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
@@ -96,23 +99,23 @@ Additional Message: ${formData.message}`;
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="hover-lift">
               <img 
-                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" 
+                src={left}
                 alt="Photography 1"
-                className="w-full h-64 object-cover rounded-lg shadow-lg transform rotate-2"
+                className="w-full h-140 object-cover rounded-lg shadow-lg transform rotate-3"
               />
             </div>
             <div className="hover-lift">
               <img 
-                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" 
+                src={center}
                 alt="Photography 2"
-                className="w-full h-80 object-cover rounded-lg shadow-xl"
+                className="w-full h-150 object-cover rounded-lg shadow-xl"
               />
             </div>
             <div className="hover-lift">
               <img 
-                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400" 
+                src={right}
                 alt="Photography 3"
-                className="w-full h-64 object-cover rounded-lg shadow-lg transform -rotate-2"
+                className="w-full h-90 object-cover rounded-lg shadow-lg transform -rotate-3"
               />
             </div>
           </div>
