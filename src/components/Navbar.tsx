@@ -8,6 +8,9 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMouseOver, setIsMouseOver] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -21,11 +24,26 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 50);
+      
+      // Only apply hide/show behavior on laptop/desktop (md and up)
+      if (window.innerWidth >= 768) {
+        if (currentScrollY > lastScrollY && currentScrollY > 100 && !isMouseOver) {
+          setIsVisible(false);
+        } else if (currentScrollY < lastScrollY || isMouseOver) {
+          setIsVisible(true);
+        }
+      } else {
+        setIsVisible(true); // Always visible on mobile
+      }
+      
+      setLastScrollY(currentScrollY);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY, isMouseOver]);
 
   const handleNavigation = (href: string) => {
     window.scrollTo(0, 0);
@@ -38,24 +56,26 @@ const Navbar = () => {
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-lg'
           : 'bg-white/90 backdrop-blur-sm'
-      }`}
+      } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      onMouseEnter={() => setIsMouseOver(true)}
+      onMouseLeave={() => setIsMouseOver(false)}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
+        <div className="flex justify-between items-center h-16 md:h-[60px]">
           {/* Logo */}
           <Link
             to="/"
             className="flex items-center space-x-2 hover:scale-105 transition-transform duration-300"
             onClick={() => window.scrollTo(0, 0)}
           >
-            <div className="w-10 h-10 bg-marvel-yellow rounded-lg flex items-center justify-center">
-              <span className="font-bold text-xl text-black">M</span>
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-marvel-yellow rounded-lg flex items-center justify-center">
+              <span className="font-bold text-lg md:text-xl text-black">M</span>
             </div>
-            <span className="text-xl font-bold text-black">Marvel Snaps</span>
+            <span className="text-lg md:text-xl font-bold text-black">Marvel Snaps</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.name}

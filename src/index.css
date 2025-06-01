@@ -131,6 +131,37 @@
   }
 }
 
+/* Camera Loader Animations */
+@keyframes tilt {
+  0%, 100% { 
+    transform: rotate(0deg); 
+  }
+  25% { 
+    transform: rotate(-5deg); 
+  }
+  75% { 
+    transform: rotate(5deg); 
+  }
+}
+
+@keyframes flash {
+  0%, 90%, 100% { 
+    opacity: 1; 
+  }
+  95% { 
+    opacity: 0; 
+  }
+}
+
+@keyframes flashEffect {
+  0%, 95%, 100% { 
+    opacity: 0; 
+  }
+  97% { 
+    opacity: 0.3; 
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
