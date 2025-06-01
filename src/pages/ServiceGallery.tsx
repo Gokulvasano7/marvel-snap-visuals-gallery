@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,26 +29,106 @@ const ServiceGallery = () => {
   ];
 
   const galleryImages = [
-    { url: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800', category: 'wedding', title: 'Wedding Ceremony' },
-    { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800', category: 'wedding', title: 'Bridal Portrait' },
-    { url: 'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800', category: 'wedding', title: 'Pre-Wedding Shoot' },
-    { url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800', category: 'candid', title: 'Candid Moments' },
-    { url: 'https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800', category: 'wedding', title: 'Wedding Reception' },
-    { url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800', category: 'portrait', title: 'Portrait Session' },
-    { url: 'https://images.unsplash.com/photo-1494790108755-2616c1e6b623?w=800', category: 'model', title: 'Model Photography' },
-    { url: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800', category: 'videography', title: 'Event Videography' },
-    { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800', category: 'baby', title: 'Baby Photography' },
-    { url: 'https://images.unsplash.com/photo-1556155092-490a1ba16284?w=800', category: 'corporate', title: 'Corporate Event' },
-    { url: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800', category: 'drone', title: 'Aerial Landscape' },
-    { url: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800', category: 'commercial', title: 'Ad Film Production' },
-    { url: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800', category: 'product', title: 'Product Photography' },
-    { url: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800', category: 'wedding', title: 'Wedding Details' },
-    { url: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800', category: 'candid', title: 'Candid Photography' },
-    { url: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800', category: 'drone', title: 'Aerial View' },
-    { url: 'https://images.unsplash.com/photo-1525258801921-35ba50f0ddfc?w=800', category: 'portrait', title: 'Family Portrait' },
-    { url: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', category: 'product', title: 'Product Showcase' },
-    { url: 'https://images.unsplash.com/photo-1493612276216-ee3925520721?w=800', category: 'corporate', title: 'Corporate Photography' },
-    { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800', category: 'drone', title: 'Wedding Aerial' }
+    // Wedding Images
+    { url: '../assest/service gallery/wedding/w1.jpeg', category: 'wedding', title: 'Wedding Ceremony' },
+    { url: '../assest/service gallery/wedding/w2.jpeg', category: 'wedding', title: 'Bridal Portrait' },
+    { url: '../assest/service gallery/wedding/w4.jpeg', category: 'wedding', title: 'Wedding Moments' },
+    { url: '../assest/service gallery/wedding/w5.jpeg', category: 'wedding', title: 'Wedding Reception' },
+    { url: '../assest/service gallery/wedding/w6.JPG', category: 'wedding', title: 'Wedding Details' },
+    { url: '../assest/service gallery/wedding/w7.JPG', category: 'wedding', title: 'Wedding Celebration' },
+    
+    // Pre and Post Wedding Images
+    { url: '../assest/service gallery/Pre and Post wedding/m2.JPG', category: 'wedding', title: 'Pre-Wedding Shoot' },
+    { url: '../assest/service gallery/Pre and Post wedding/m3.jpeg', category: 'wedding', title: 'Couple Portrait' },
+    { url: '../assest/service gallery/Pre and Post wedding/m4.jpeg', category: 'wedding', title: 'Romantic Session' },
+    { url: '../assest/service gallery/Pre and Post wedding/m5.jpeg', category: 'wedding', title: 'Pre-Wedding Photography' },
+    { url: '../assest/service gallery/Pre and Post wedding/m6.jpeg', category: 'wedding', title: 'Post-Wedding Shoot' },
+    
+    // Candid Images
+    { url: '../assest/service gallery/candit/c1.jpeg', category: 'candid', title: 'Candid Moments' },
+    { url: '../assest/service gallery/candit/c2.jpeg', category: 'candid', title: 'Natural Expressions' },
+    { url: '../assest/service gallery/candit/c3.jpeg', category: 'candid', title: 'Candid Photography' },
+    { url: '../assest/service gallery/candit/c4.jpeg', category: 'candid', title: 'Spontaneous Shots' },
+    { url: '../assest/service gallery/candit/c5.jpg', category: 'candid', title: 'Candid Capture' },
+    { url: '../assest/service gallery/candit/c6.JPG', category: 'candid', title: 'Natural Moments' },
+    { url: '../assest/service gallery/candit/c7.JPG', category: 'candid', title: 'Candid Style' },
+    { url: '../assest/service gallery/candit/c8.jpg', category: 'candid', title: 'Authentic Moments' },
+    { url: '../assest/service gallery/candit/c9.jpg', category: 'candid', title: 'Candid Stories' },
+    { url: '../assest/service gallery/candit/c10.jpg', category: 'candid', title: 'Life Moments' },
+    
+    // Portrait Images
+    { url: '../assest/service gallery/portraits/p1.jpeg', category: 'portrait', title: 'Portrait Session' },
+    { url: '../assest/service gallery/portraits/p2.jpeg', category: 'portrait', title: 'Professional Portrait' },
+    { url: '../assest/service gallery/portraits/p3.jpg', category: 'portrait', title: 'Family Portrait' },
+    { url: '../assest/service gallery/portraits/p4.jpeg', category: 'portrait', title: 'Individual Portrait' },
+    { url: '../assest/service gallery/portraits/p5.jpeg', category: 'portrait', title: 'Portrait Photography' },
+    { url: '../assest/service gallery/portraits/p6.jpg', category: 'portrait', title: 'Portrait Art' },
+    { url: '../assest/service gallery/portraits/p7.JPG', category: 'portrait', title: 'Studio Portrait' },
+    { url: '../assest/service gallery/portraits/p8.jpg', category: 'portrait', title: 'Creative Portrait' },
+    
+    // Model Images
+    { url: '../assest/service gallery/model pics/m1.jpg', category: 'model', title: 'Model Photography' },
+    { url: '../assest/service gallery/model pics/m2.jpg', category: 'model', title: 'Fashion Shoot' },
+    { url: '../assest/service gallery/model pics/m3.jpg', category: 'model', title: 'Model Portfolio' },
+    { url: '../assest/service gallery/model pics/m4.jpg', category: 'model', title: 'Beauty Photography' },
+    { url: '../assest/service gallery/model pics/m5.jpeg', category: 'model', title: 'Fashion Portrait' },
+    { url: '../assest/service gallery/model pics/m6.jpeg', category: 'model', title: 'Model Session' },
+    { url: '../assest/service gallery/model pics/m7.jpeg', category: 'model', title: 'Creative Model Shoot' },
+    { url: '../assest/service gallery/model pics/m8.jpeg', category: 'model', title: 'Professional Model' },
+    { url: '../assest/service gallery/model pics/m9.jpeg', category: 'model', title: 'Model Art' },
+    
+    // Baby Images
+    { url: '../assest/service gallery/baby/b1.jpeg', category: 'baby', title: 'Baby Photography' },
+    { url: '../assest/service gallery/baby/b2.jpeg', category: 'baby', title: 'Newborn Session' },
+    { url: '../assest/service gallery/baby/b3.jpeg', category: 'baby', title: 'Baby Portraits' },
+    { url: '../assest/service gallery/baby/b4.jpeg', category: 'baby', title: 'Baby Milestones' },
+    { url: '../assest/service gallery/baby/b5.jpeg', category: 'baby', title: 'Baby Moments' },
+    { url: '../assest/service gallery/baby/b6.jpeg', category: 'baby', title: 'Baby Art' },
+    { url: '../assest/service gallery/baby/b7.jpeg', category: 'baby', title: 'Baby Session' },
+    { url: '../assest/service gallery/baby/b8.jpeg', category: 'baby', title: 'Baby Photography' },
+    { url: '../assest/service gallery/baby/b9.jpeg', category: 'baby', title: 'Baby Love' },
+    { url: '../assest/service gallery/baby/b10.jpeg', category: 'baby', title: 'Baby Memories' },
+    { url: '../assest/service gallery/baby/b11.jpeg', category: 'baby', title: 'Baby Joy' },
+    { url: '../assest/service gallery/baby/b12.jpeg', category: 'baby', title: 'Baby Dreams' },
+    { url: '../assest/service gallery/baby/b13.JPG', category: 'baby', title: 'Baby Smiles' },
+    { url: '../assest/service gallery/baby/b14.jpg', category: 'baby', title: 'Baby Wonder' },
+    { url: '../assest/service gallery/baby/b15.jpg', category: 'baby', title: 'Baby Magic' },
+    { url: '../assest/service gallery/baby/b16.JPG', category: 'baby', title: 'Baby Bliss' },
+    { url: '../assest/service gallery/baby/b17.JPG', category: 'baby', title: 'Baby Cuteness' },
+    { url: '../assest/service gallery/baby/b18.JPG', category: 'baby', title: 'Baby Angels' },
+    { url: '../assest/service gallery/baby/b19.JPG', category: 'baby', title: 'Baby Precious' },
+    { url: '../assest/service gallery/baby/b20.JPG', category: 'baby', title: 'Baby Sweetness' },
+    
+    // Baby Shower Images
+    { url: '../assest/service gallery/baby shower/bs1.jpg', category: 'baby', title: 'Baby Shower Celebration' },
+    { url: '../assest/service gallery/baby shower/bs2.jpg', category: 'baby', title: 'Baby Shower Event' },
+    { url: '../assest/service gallery/baby shower/bs3.JPG', category: 'baby', title: 'Baby Shower Photography' },
+    { url: '../assest/service gallery/baby shower/bs4.JPG', category: 'baby', title: 'Baby Shower Moments' },
+    { url: '../assest/service gallery/baby shower/bs5.JPG', category: 'baby', title: 'Baby Shower Joy' },
+    
+    // Birthday Images
+    { url: '../assest/service gallery/birthday/bd1.jpeg', category: 'videography', title: 'Birthday Celebration' },
+    { url: '../assest/service gallery/birthday/bd2.jpeg', category: 'videography', title: 'Birthday Party' },
+    { url: '../assest/service gallery/birthday/bd3.jpeg', category: 'videography', title: 'Birthday Event' },
+    { url: '../assest/service gallery/birthday/bd4.jpeg', category: 'videography', title: 'Birthday Photography' },
+    { url: '../assest/service gallery/birthday/bd5.jpeg', category: 'videography', title: 'Birthday Moments' },
+    { url: '../assest/service gallery/birthday/bd6.jpeg', category: 'videography', title: 'Birthday Fun' },
+    { url: '../assest/service gallery/birthday/bd7.jpeg', category: 'videography', title: 'Birthday Joy' },
+    { url: '../assest/service gallery/birthday/bd8.jpeg', category: 'videography', title: 'Birthday Memories' },
+    
+    // Corporate Images
+    { url: '../assest/service gallery/corp/c1.jpeg', category: 'corporate', title: 'Corporate Event' },
+    { url: '../assest/service gallery/corp/c2.jpeg', category: 'corporate', title: 'Corporate Photography' },
+    { url: '../assest/service gallery/corp/c3.jpeg', category: 'corporate', title: 'Business Event' },
+    { url: '../assest/service gallery/corp/c4.jpeg', category: 'corporate', title: 'Corporate Session' },
+    { url: '../assest/service gallery/corp/c5.jpeg', category: 'corporate', title: 'Professional Photography' },
+    
+    // Drone Images
+    { url: '../assest/service gallery/drone/d1.jpeg', category: 'drone', title: 'Aerial Photography' },
+    { url: '../assest/service gallery/drone/d2.jpeg', category: 'drone', title: 'Drone Shoots' },
+    { url: '../assest/service gallery/drone/d3.jpeg', category: 'drone', title: 'Aerial View' },
+    { url: '../assest/service gallery/drone/d4.jpeg', category: 'drone', title: 'Drone Cinematography' },
+    { url: '../assest/service gallery/drone/d5.jpeg', category: 'drone', title: 'Aerial Landscape' }
   ];
 
   const filteredImages = selectedCategory === 'all' 
