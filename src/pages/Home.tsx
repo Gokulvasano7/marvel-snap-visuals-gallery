@@ -103,7 +103,7 @@ Additional Message: ${formData.message}`;
             </div>
             <div className="hover-lift">
               <img 
-                src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=400" 
+                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" 
                 alt="Photography 2"
                 className="w-full h-80 object-cover rounded-lg shadow-xl"
               />
