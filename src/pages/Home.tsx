@@ -80,31 +80,17 @@ Additional Message: ${formData.message}`;
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1920")'
+            backgroundImage: 'url("/lovable-uploads/1062a8ed-c8c5-471b-86e8-f96695647fb1.png")'
           }}
         />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
-            Marvel <span className="text-marvel-yellow animate-glow">Snaps</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 animate-fade-in">
-            Where Every Frame Tells a Story
-          </p>
-          <Button 
-            onClick={() => document.getElementById('welcome')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-marvel-yellow text-black hover:bg-yellow-400 text-lg px-8 py-3 animate-fade-in"
-          >
-            Discover Our Work
-          </Button>
-        </div>
+        <div className="absolute inset-0 bg-black/20" />
       </section>
 
       {/* Welcome Section */}
-      <section id="welcome" className="py-20 bg-gray-50 curved-section">
+      <section id="welcome" className="py-20 bg-marvel-yellow curved-section-outward">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-black">
-            Welcome to <span className="text-marvel-yellow">Marvel Snaps</span>
+            Welcome to Marvel Snaps
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -131,7 +117,7 @@ Additional Message: ${formData.message}`;
             </div>
           </div>
 
-          <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-800 mb-8 max-w-3xl mx-auto">
             We are passionate storytellers dedicated to capturing your precious moments through our lens. 
             Every photograph is a window to a beautiful memory, crafted with love and artistic vision.
           </p>
@@ -166,7 +152,7 @@ Additional Message: ${formData.message}`;
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
-              Our <span className="text-marvel-yellow">Services</span>
+              Our Services
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Professional photography and videography services tailored to capture your most precious moments
@@ -203,7 +189,7 @@ Additional Message: ${formData.message}`;
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
-              Our <span className="text-marvel-yellow">Gallery</span>
+              Our Gallery
             </h2>
             <p className="text-lg text-gray-600">A glimpse into our portfolio of captured moments</p>
           </div>
@@ -235,7 +221,7 @@ Additional Message: ${formData.message}`;
       <section className="py-20 bg-marvel-black text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Ready to Capture Your <span className="text-marvel-yellow">Moments?</span>
+            Ready to Capture Your Moments?
           </h2>
           <p className="text-xl text-gray-300 mb-8">
             Let's create beautiful memories together

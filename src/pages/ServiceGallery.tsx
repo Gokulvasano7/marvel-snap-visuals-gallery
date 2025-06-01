@@ -1,11 +1,19 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ServiceGallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category');
+    if (category) {
+      setSelectedCategory(category);
+    }
+  }, []);
 
   const categories = [
     { id: 'all', name: 'All' },
@@ -67,7 +75,7 @@ const ServiceGallery = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black">
-            Service <span className="text-marvel-yellow">Gallery</span>
+            Service Gallery
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Explore our work organized by service category

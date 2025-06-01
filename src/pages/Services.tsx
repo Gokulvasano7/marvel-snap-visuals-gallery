@@ -12,7 +12,8 @@ const Services = () => {
       description: 'Capture your special day with elegance and emotion',
       features: ['Pre-wedding shoots', 'Ceremony coverage', 'Reception photography', 'Candid moments'],
       price: 'Starting from ₹25,000',
-      image: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600'
+      image: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600',
+      category: 'wedding'
     },
     {
       title: 'Event Photography',
@@ -20,7 +21,8 @@ const Services = () => {
       description: 'Professional coverage for all your special events',
       features: ['Corporate events', 'Birthday parties', 'Anniversaries', 'Cultural celebrations'],
       price: 'Starting from ₹15,000',
-      image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600'
+      image: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600',
+      category: 'event'
     },
     {
       title: 'Drone Photography',
@@ -28,7 +30,8 @@ const Services = () => {
       description: 'Stunning aerial perspectives for your memories',
       features: ['Aerial shots', '4K video recording', 'Landscape photography', 'Property coverage'],
       price: 'Starting from ₹8,000',
-      image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600'
+      image: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=600',
+      category: 'drone'
     },
     {
       title: 'Videography',
@@ -36,7 +39,8 @@ const Services = () => {
       description: 'Cinematic video production and storytelling',
       features: ['Wedding films', 'Event highlights', 'Commercial videos', 'Documentary style'],
       price: 'Starting from ₹20,000',
-      image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600'
+      image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600',
+      category: 'commercial'
     },
     {
       title: 'Baby & Family Shoots',
@@ -44,7 +48,8 @@ const Services = () => {
       description: 'Precious moments with your little ones',
       features: ['Newborn photography', 'Family portraits', 'Maternity shoots', 'Milestone photos'],
       price: 'Starting from ₹10,000',
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600'
+      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600',
+      category: 'family'
     },
     {
       title: 'Commercial Photography',
@@ -52,9 +57,14 @@ const Services = () => {
       description: 'Professional photography for business needs',
       features: ['Product photography', 'Corporate headshots', 'Brand campaigns', 'Ad films'],
       price: 'Starting from ₹12,000',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600'
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600',
+      category: 'commercial'
     }
   ];
+
+  const handleViewPhotos = (category: string) => {
+    window.location.href = `/service-gallery?category=${category}`;
+  };
 
   return (
     <div className="min-h-screen pt-20 bg-gray-50">
@@ -62,7 +72,7 @@ const Services = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black">
-            Our <span className="text-marvel-yellow">Services</span>
+            Our Services
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Professional photography and videography services tailored to capture your most precious moments
@@ -100,12 +110,21 @@ const Services = () => {
                   <div className="text-xl font-bold text-marvel-yellow mb-4">
                     {service.price}
                   </div>
-                  <Button 
-                    onClick={() => window.location.href = '/contact'}
-                    className="w-full bg-black text-white hover:bg-gray-800"
-                  >
-                    Book Now
-                  </Button>
+                  <div className="space-y-2">
+                    <Button 
+                      onClick={() => window.location.href = '/contact'}
+                      className="w-full bg-black text-white hover:bg-gray-800"
+                    >
+                      Book Now
+                    </Button>
+                    <Button 
+                      onClick={() => handleViewPhotos(service.category)}
+                      variant="outline"
+                      className="w-full border-marvel-yellow text-marvel-yellow hover:bg-marvel-yellow hover:text-black"
+                    >
+                      View Photos
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -118,7 +137,7 @@ const Services = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">
-              Why Choose <span className="text-marvel-yellow">Marvel Snaps?</span>
+              Why Choose Marvel Snaps?
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto">
               We bring passion, creativity, and professionalism to every project

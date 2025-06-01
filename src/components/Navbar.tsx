@@ -27,12 +27,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavigation = (href: string) => {
+    window.scrollTo(0, 0);
+    window.location.href = href;
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          : 'bg-white/90 backdrop-blur-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,6 +46,7 @@ const Navbar = () => {
           <Link
             to="/"
             className="flex items-center space-x-2 hover:scale-105 transition-transform duration-300"
+            onClick={() => window.scrollTo(0, 0)}
           >
             <div className="w-10 h-10 bg-marvel-yellow rounded-lg flex items-center justify-center">
               <span className="font-bold text-xl text-black">M</span>
@@ -51,9 +57,9 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                to={item.href}
+                onClick={() => handleNavigation(item.href)}
                 className={`relative text-sm font-medium transition-colors duration-300 hover:text-marvel-yellow ${
                   location.pathname === item.href
                     ? 'text-marvel-yellow'
@@ -63,7 +69,7 @@ const Navbar = () => {
                 }`}
               >
                 {item.name}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -78,25 +84,29 @@ const Navbar = () => {
               <SheetContent side="right" className="w-80">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between py-4">
-                    <Link
-                      to="/"
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        handleNavigation('/');
+                      }}
                       className="flex items-center space-x-2"
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <div className="w-8 h-8 bg-marvel-yellow rounded-lg flex items-center justify-center">
                         <span className="font-bold text-lg text-black">M</span>
                       </div>
                       <span className="text-lg font-bold">Marvel Snaps</span>
-                    </Link>
+                    </button>
                   </div>
 
                   <div className="flex-1 py-8">
                     <nav className="space-y-6">
                       {navItems.map((item) => (
-                        <Link
+                        <button
                           key={item.name}
-                          to={item.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            handleNavigation(item.href);
+                          }}
                           className={`block text-lg font-medium transition-colors duration-300 hover:text-marvel-yellow ${
                             location.pathname === item.href
                               ? 'text-marvel-yellow'
@@ -104,7 +114,7 @@ const Navbar = () => {
                           }`}
                         >
                           {item.name}
-                        </Link>
+                        </button>
                       ))}
                     </nav>
                   </div>
