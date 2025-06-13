@@ -96,26 +96,26 @@ Additional Message: ${formData.message}`;
             Welcome to Marvel Snaps
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-3 gap-2 md:gap-8 mb-12">
             <div className="hover-lift">
               <img 
                 src={left}
                 alt="Photography 1"
-                className="w-full h-140 object-cover rounded-lg shadow-lg transform rotate-3"
+                className="w-full h-24 md:h-140 object-cover rounded-lg shadow-lg transform rotate-3"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={center}
                 alt="Photography 2"
-                className="w-full h-150 object-cover rounded-lg shadow-xl"
+                className="w-full h-32 md:h-150 object-cover rounded-lg shadow-xl"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={right}
                 alt="Photography 3"
-                className="w-full h-90 object-cover rounded-lg shadow-lg transform -rotate-3"
+                className="w-full h-24 md:h-90 object-cover rounded-lg shadow-lg transform -rotate-3"
               />
             </div>
           </div>
@@ -135,15 +135,15 @@ Additional Message: ${formData.message}`;
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-marvel-black text-white">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
             {stats.map((stat, index) => (
-              <div key={index} className="hover-lift">
-                <div className="text-4xl md:text-5xl font-bold text-marvel-yellow mb-2">
+              <div key={index} className="hover-lift bg-marvel-yellow rounded-lg p-4 md:p-6">
+                <div className="text-2xl md:text-4xl font-bold text-black mb-2">
                   {stat.number}
                 </div>
-                <div className="text-gray-300">{stat.label}</div>
+                <div className="text-black text-sm md:text-base">{stat.label}</div>
               </div>
             ))}
           </div>

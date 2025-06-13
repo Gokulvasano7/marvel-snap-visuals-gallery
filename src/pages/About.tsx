@@ -126,8 +126,8 @@ const About = () => {
       <section className="py-16 bg-marvel-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">
-              Our <span className="text-marvel-yellow">Achievements</span>
+            <h2 className="text-4xl font-bold mb-4 text-white">
+              Our Achievements
             </h2>
             <p className="text-gray-300">Numbers that speak for our dedication and quality</p>
           </div>
@@ -152,7 +152,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
-              Meet Our <span className="text-marvel-yellow">Team</span>
+              Meet Our Team
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Talented professionals who bring creativity, expertise, and passion to every project
