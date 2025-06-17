@@ -108,7 +108,7 @@ Additional Message: ${formData.message}`;
               <img 
                 src={center}
                 alt="Photography 2"
-                className="w-full h-32 md:h-110px object-cover rounded-lg shadow-xl"
+                className="w-full h-32 md:h-[150px] object-cover rounded-lg shadow-xl"
               />
             </div>
             <div className="hover-lift">
