@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Instagram, Youtube, MessageCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const socialLinks = [
@@ -100,12 +101,12 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-marvel-yellow">Quick Links</h3>
             <div className="grid grid-cols-2 gap-2">
-              <a href="/" className="text-gray-300 hover:text-marvel-yellow transition-colors">Home</a>
-              <a href="/about" className="text-gray-300 hover:text-marvel-yellow transition-colors">About</a>
-              <a href="/gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Gallery</a>
-              <a href="/services" className="text-gray-300 hover:text-marvel-yellow transition-colors">Services</a>
-              <a href="/service-gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Service Gallery</a>
-              <a href="/contact" className="text-gray-300 hover:text-marvel-yellow transition-colors">Contact</a>
+              <Link to="/" className="text-gray-300 hover:text-marvel-yellow transition-colors">Home</Link>
+              <Link to="/about" className="text-gray-300 hover:text-marvel-yellow transition-colors">About</Link>
+              <Link to="/gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Gallery</Link>
+              <Link to="/services" className="text-gray-300 hover:text-marvel-yellow transition-colors">Services</Link>
+              <Link to="/service-gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Service Gallery</Link>
+              <Link to="/contact" className="text-gray-300 hover:text-marvel-yellow transition-colors">Contact</Link>
             </div>
           </div>
         </div>

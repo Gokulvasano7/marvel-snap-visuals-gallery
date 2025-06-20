@@ -1,10 +1,12 @@
-
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Video, User, Building, Plane, Film, Package, Users, Sparkles, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
   const services = [
     {
       title: 'Wedding Photography',
@@ -108,11 +110,11 @@ const Services = () => {
   ];
 
   const handleViewPhotos = (category: string) => {
-    window.location.href = `/service-gallery?category=${category}`;
+    navigate(`/service-gallery?category=${category}`);
   };
 
   const handleBooking = () => {
-    window.location.href = '/contact';
+    navigate('/contact');
   };
 
   return (

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   // Helper function to dynamically import service gallery images
   const importImage = (path: string) => {
@@ -86,7 +88,7 @@ const Gallery = () => {
   ];
 
   const handleNavigation = (url: string) => {
-    window.location.href = url;
+    navigate(url);
   };
 
   // ... keep existing code (openLightbox, closeLightbox, nextImage, prevImage functions)
