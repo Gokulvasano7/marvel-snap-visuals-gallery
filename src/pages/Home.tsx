@@ -7,12 +7,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
+import { useLoading } from '@/contexts/LoadingContext';
 import center from '@/assest/images/center.jpeg'; 
 import left from '@/assest/images/left.jpeg';
 import right from '@/assest/images/right.jpeg';
 
 const Home = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
+  const { setIsLoading } = useLoading();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -44,18 +46,60 @@ const Home = () => {
     { number: '1000+', label: 'Happy Clients' }
   ];
 
+  // Helper function to dynamically import service gallery images
+  const importImage = (path: string) => {
+    try {
+      return new URL(`../assest/service gallery/${path}`, import.meta.url).href;
+    } catch (error) {
+      console.error(`Failed to load image: ${path}`, error);
+      return '/placeholder.svg';
+    }
+  };
+
   const galleryImages = [
-    'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500',
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=500',
-    'https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=500',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500',
-    'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=500',
-    'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=500',
-    'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=500',
-    'https://images.unsplash.com/photo-1525258801921-35ba50f0ddfc?w=500',
-    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500',
-    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500'
+    // Wedding Images
+    importImage('wedding/w1.jpeg'),
+    importImage('wedding/w2.jpeg'),
+    importImage('wedding/w4.jpeg'),
+    importImage('wedding/w5.jpeg'),
+    importImage('wedding/w6.jpeg'),
+    
+    // Pre and Post Wedding Images
+    importImage('Pre and Post wedding/m2.jpeg'),
+    importImage('Pre and Post wedding/m3.jpeg'),
+    importImage('Pre and Post wedding/m4.jpeg'),
+    
+    // Candid Images
+    importImage('candit/c1.jpeg'),
+    importImage('candit/c2.jpeg'),
+    importImage('candit/c3.jpeg'),
+    importImage('candit/c4.jpeg'),
+    importImage('candit/c5.jpg'),
+    importImage('candit/c6.jpeg'),
+    
+    // Model Images
+    importImage('model pics/m1.jpg'),
+    importImage('model pics/m2.jpg'),
+    importImage('model pics/m3.jpg'),
+    importImage('model pics/m4.jpg'),
+    
+    // Baby Images
+    importImage('baby/b1.jpeg'),
+    importImage('baby/b2.jpeg'),
+    importImage('baby/b3.jpeg'),
+    importImage('baby/b4.jpeg'),
+    importImage('baby/b5.jpeg'),
+    importImage('baby/b6.jpeg'),
+    importImage('baby/b7.jpeg'),
+    importImage('baby/b8.jpeg')
   ];
+
+  const handleNavigation = (url: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      window.location.href = url;
+    }, 300);
+  };
 
   const handleBookingSubmit = () => {
     const message = `New Booking Request from Marvel Snaps Website
@@ -101,21 +145,21 @@ Additional Message: ${formData.message}`;
               <img 
                 src={left}
                 alt="Photography 1"
-                className="w-full h-24 md:h-80 object-cover rounded-lg shadow-lg transform rotate-3"
+                className="w-full h-32 md:h-80 object-cover rounded-lg shadow-lg transform rotate-3"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={center}
                 alt="Photography 2"
-                className="w-full h-32 md:h-96 object-cover rounded-lg shadow-xl"
+                className="w-full h-40 md:h-96 object-cover rounded-lg shadow-xl"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={right}
                 alt="Photography 3"
-                className="w-full h-24 md:h-80 object-cover rounded-lg shadow-lg transform -rotate-3"
+                className="w-full h-32 md:h-80 object-cover rounded-lg shadow-lg transform -rotate-3"
               />
             </div>
           </div>
@@ -126,7 +170,7 @@ Additional Message: ${formData.message}`;
           </p>
 
           <Button 
-            onClick={() => window.location.href = '/about'}
+            onClick={() => handleNavigation('/about')}
             className="bg-black text-white hover:bg-gray-800 px-8 py-3"
           >
             View Our Story
@@ -178,7 +222,7 @@ Additional Message: ${formData.message}`;
 
           <div className="text-center">
             <Button 
-              onClick={() => window.location.href = '/services'}
+              onClick={() => handleNavigation('/services')}
               className="bg-marvel-yellow text-black hover:bg-yellow-400 px-8 py-3"
             >
               View More Services
@@ -198,12 +242,15 @@ Additional Message: ${formData.message}`;
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-            {galleryImages.map((image, index) => (
+            {galleryImages.slice(0, 10).map((image, index) => (
               <div key={index} className="hover-lift cursor-pointer overflow-hidden rounded-lg">
                 <img 
                   src={image} 
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/placeholder.svg';
+                  }}
                 />
               </div>
             ))}
@@ -211,7 +258,7 @@ Additional Message: ${formData.message}`;
 
           <div className="text-center">
             <Button 
-              onClick={() => window.location.href = '/gallery'}
+              onClick={() => handleNavigation('/gallery')}
               className="bg-black text-white hover:bg-gray-800 px-8 py-3"
             >
               View Full Gallery

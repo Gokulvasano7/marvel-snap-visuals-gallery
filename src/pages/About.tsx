@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import studio from '@/assest/videos/studio.webm'; // Assuming you have a studio image in your assets
+import { useLoading } from '@/contexts/LoadingContext';
+import studio from '@/assest/videos/studio.webm';
 
 const About = () => {
   const [isMuted, setIsMuted] = useState(true);
+  const { setIsLoading } = useLoading();
 
   const stats = [
     { number: '500+', label: 'Projects', icon: Camera },
@@ -45,6 +47,13 @@ const About = () => {
     { name: 'Meera Joshi', role: 'Assistant Photographer', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300' }
   ];
 
+  const handleNavigation = (url: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      window.location.href = url;
+    }, 300);
+  };
+
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Video Section */}
@@ -68,7 +77,7 @@ const About = () => {
         </Button>
 
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-glow">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-glow opacity-75">
             Marvel Snaps
           </h1>
           <p className="text-xl md:text-2xl italic">
@@ -83,8 +92,8 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <div className="flex items-center mb-8">
-                <div className="w-16 h-16 bg-marvel-yellow rounded-lg flex items-center justify-center mr-6">
-                  <span className="font-bold text-2xl text-black">M</span>
+                <div className="w-12 h-12 bg-marvel-yellow rounded-lg flex items-center justify-center mr-6">
+                  <span className="font-bold text-xl text-black">M</span>
                 </div>
                 <h2 className="text-4xl font-bold text-black">Our Story</h2>
               </div>
@@ -113,9 +122,9 @@ const About = () => {
             </div>
             <div className="order-1 lg:order-2">
               <img 
-                src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600" 
+                src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" 
                 alt="Our Story"
-                className="w-full rounded-lg shadow-2xl hover-lift"
+                className="w-full max-w-md mx-auto rounded-lg shadow-2xl hover-lift"
               />
             </div>
           </div>

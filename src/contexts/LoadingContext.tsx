@@ -11,13 +11,29 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  // Prevent loader from showing during normal navigation
+  // Auto-hide loader after a maximum duration to prevent infinite loading
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    
+    if (isLoading) {
+      timeoutId = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000); // Maximum 2 seconds loading time
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [isLoading]);
+
+  // Listen for page navigation and reset loading state
   useEffect(() => {
     const handleRouteChange = () => {
       setIsLoading(false);
     };
 
-    // Listen for route changes to clear loading state
     window.addEventListener('popstate', handleRouteChange);
     
     return () => {

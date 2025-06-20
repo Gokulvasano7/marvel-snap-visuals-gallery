@@ -2,32 +2,97 @@
 import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLoading } from '@/contexts/LoadingContext';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const { setIsLoading } = useLoading();
+
+  // Helper function to dynamically import service gallery images
+  const importImage = (path: string) => {
+    try {
+      return new URL(`../assest/service gallery/${path}`, import.meta.url).href;
+    } catch (error) {
+      console.error(`Failed to load image: ${path}`, error);
+      return '/placeholder.svg';
+    }
+  };
 
   const galleryImages = [
-    'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800',
-    'https://images.unsplash.com/photo-1519741497674-611481863552?w=800',
-    'https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800',
-    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800',
-    'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800',
-    'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800',
-    'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800',
-    'https://images.unsplash.com/photo-1525258801921-35ba50f0ddfc?w=800',
-    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800',
-    'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800',
-    'https://images.unsplash.com/photo-1493612276216-ee3925520721?w=800',
-    'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800',
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800',
-    'https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800',
-    'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800',
-    'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-    'https://images.unsplash.com/photo-1524824267900-2fa9cbf7a506?w=800',
-    'https://images.unsplash.com/photo-1516633503179-f73dbde62dd0?w=800',
-    'https://images.unsplash.com/photo-1505440484611-23c171ad6828?w=800'
+    // Wedding Images
+    importImage('wedding/w1.jpeg'),
+    importImage('wedding/w2.jpeg'),
+    importImage('wedding/w4.jpeg'),
+    importImage('wedding/w5.jpeg'),
+    importImage('wedding/w6.jpeg'),
+    importImage('wedding/w7.jpeg'),
+    
+    // Pre and Post Wedding Images
+    importImage('Pre and Post wedding/m2.jpeg'),
+    importImage('Pre and Post wedding/m3.jpeg'),
+    importImage('Pre and Post wedding/m4.jpeg'),
+    importImage('Pre and Post wedding/m5.jpeg'),
+    importImage('Pre and Post wedding/m6.jpeg'),
+    
+    // Candid Images
+    importImage('candit/c1.jpeg'),
+    importImage('candit/c2.jpeg'),
+    importImage('candit/c3.jpeg'),
+    importImage('candit/c4.jpeg'),
+    importImage('candit/c5.jpg'),
+    importImage('candit/c6.jpeg'),
+    importImage('candit/c7.jpeg'),
+    importImage('candit/c8.jpg'),
+    importImage('candit/c9.jpg'),
+    importImage('candit/c10.jpg'),
+    
+    // Model Images
+    importImage('model pics/m1.jpg'),
+    importImage('model pics/m2.jpg'),
+    importImage('model pics/m3.jpg'),
+    importImage('model pics/m4.jpg'),
+    importImage('model pics/m5.jpeg'),
+    importImage('model pics/m6.jpeg'),
+    importImage('model pics/m7.jpeg'),
+    importImage('model pics/m8.jpeg'),
+    importImage('model pics/m9.jpeg'),
+    
+    // Baby Images
+    importImage('baby/b1.jpeg'),
+    importImage('baby/b2.jpeg'),
+    importImage('baby/b3.jpeg'),
+    importImage('baby/b4.jpeg'),
+    importImage('baby/b5.jpeg'),
+    importImage('baby/b6.jpeg'),
+    importImage('baby/b7.jpeg'),
+    importImage('baby/b8.jpeg'),
+    importImage('baby/b9.jpeg'),
+    importImage('baby/b10.jpeg'),
+    importImage('baby/b11.jpeg'),
+    importImage('baby/b12.jpeg'),
+    importImage('baby/b13.jpeg'),
+    importImage('baby/b14.jpg'),
+    importImage('baby/b15.jpg'),
+    importImage('baby/b16.jpeg'),
+    importImage('baby/b17.jpeg'),
+    importImage('baby/b18.jpeg'),
+    importImage('baby/b19.jpeg'),
+    importImage('baby/b20.jpeg'),
+    
+    // Baby Shower Images
+    importImage('baby shower/bs1.jpg'),
+    importImage('baby shower/bs2.jpg'),
+    importImage('baby shower/bs3.jpeg'),
+    importImage('baby shower/bs4.jpeg'),
+    importImage('baby shower/bs5.jpeg')
   ];
+
+  const handleNavigation = (url: string) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      window.location.href = url;
+    }, 300);
+  };
 
   const openLightbox = (index: number) => {
     setSelectedImage(index);
@@ -79,6 +144,9 @@ const Gallery = () => {
                   src={image} 
                   alt={`Gallery ${index + 1}`}
                   className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/placeholder.svg';
+                  }}
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -127,6 +195,9 @@ const Gallery = () => {
               src={galleryImages[selectedImage]} 
               alt={`Gallery ${selectedImage + 1}`}
               className="max-w-full max-h-full object-contain rounded-lg"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/placeholder.svg';
+              }}
             />
           </div>
 
@@ -146,7 +217,7 @@ const Gallery = () => {
             Let's create something beautiful together for your special occasion
           </p>
           <Button 
-            onClick={() => window.location.href = '/contact'}
+            onClick={() => handleNavigation('/contact')}
             className="bg-marvel-yellow text-black hover:bg-yellow-400 px-8 py-3"
           >
             Get in Touch
