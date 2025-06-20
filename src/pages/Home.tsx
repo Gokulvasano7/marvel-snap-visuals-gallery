@@ -101,21 +101,21 @@ Additional Message: ${formData.message}`;
               <img 
                 src={left}
                 alt="Photography 1"
-                className="w-full h-24 md:h-100 object-cover rounded-lg shadow-lg transform rotate-3"
+                className="w-full h-24 md:h-80 object-cover rounded-lg shadow-lg transform rotate-3"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={center}
                 alt="Photography 2"
-                className="w-full h-32 md:h-[150px] object-cover rounded-lg shadow-xl"
+                className="w-full h-32 md:h-96 object-cover rounded-lg shadow-xl"
               />
             </div>
             <div className="hover-lift">
               <img 
                 src={right}
                 alt="Photography 3"
-                className="w-full h-24 md:h-100 object-cover rounded-lg shadow-lg transform -rotate-3"
+                className="w-full h-24 md:h-80 object-cover rounded-lg shadow-lg transform -rotate-3"
               />
             </div>
           </div>
