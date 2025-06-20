@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { Instagram, Youtube, MessageCircle, Mail, Phone, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigation } from '@/contexts/NavigationContext';
 
 const Footer = () => {
+  const { navigateWithLoader } = useNavigation();
+
   const socialLinks = [
     {
       name: 'Instagram',
@@ -35,6 +37,15 @@ const Footer = () => {
       href: 'tel:+918098449639',
       color: 'hover:text-marvel-yellow'
     }
+  ];
+
+  const quickLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Services', href: '/services' },
+    { name: 'Service Gallery', href: '/service-gallery' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -101,12 +112,15 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-xl font-semibold text-marvel-yellow">Quick Links</h3>
             <div className="grid grid-cols-2 gap-2">
-              <Link to="/" className="text-gray-300 hover:text-marvel-yellow transition-colors">Home</Link>
-              <Link to="/about" className="text-gray-300 hover:text-marvel-yellow transition-colors">About</Link>
-              <Link to="/gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Gallery</Link>
-              <Link to="/services" className="text-gray-300 hover:text-marvel-yellow transition-colors">Services</Link>
-              <Link to="/service-gallery" className="text-gray-300 hover:text-marvel-yellow transition-colors">Service Gallery</Link>
-              <Link to="/contact" className="text-gray-300 hover:text-marvel-yellow transition-colors">Contact</Link>
+              {quickLinks.map((link) => (
+                <button
+                  key={link.name}
+                  onClick={() => navigateWithLoader(link.href)}
+                  className="text-left text-gray-300 hover:text-marvel-yellow transition-colors"
+                >
+                  {link.name}
+                </button>
+              ))}
             </div>
           </div>
         </div>

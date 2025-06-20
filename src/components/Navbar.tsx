@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Instagram, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useNavigation } from '@/contexts/NavigationContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const location = useLocation();
+  const { navigateWithLoader } = useNavigation();
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -46,8 +48,7 @@ const Navbar = () => {
   }, [lastScrollY, isMouseOver]);
 
   const handleNavigation = (href: string) => {
-    window.scrollTo(0, 0);
-    window.location.href = href;
+    navigateWithLoader(href);
   };
 
   return (
@@ -63,16 +64,15 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-[60px]">
           {/* Logo */}
-          <Link
-            to="/"
+          <button
+            onClick={() => handleNavigation('/')}
             className="flex items-center space-x-2 hover:scale-105 transition-transform duration-300"
-            onClick={() => window.scrollTo(0, 0)}
           >
             <div className="w-8 h-8 md:w-10 md:h-10 bg-marvel-yellow rounded-lg flex items-center justify-center">
               <span className="font-bold text-lg md:text-xl text-black">M</span>
             </div>
             <span className="text-lg md:text-xl font-bold text-black">Marvel Snaps</span>
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">

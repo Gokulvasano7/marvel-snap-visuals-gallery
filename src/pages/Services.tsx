@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Camera, Heart, Video, User, Building, Plane, Film, Package, Users, Sparkles, Eye } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigation } from '@/contexts/NavigationContext';
 
 const Services = () => {
-  const navigate = useNavigate();
+  const { navigateWithLoader } = useNavigation();
 
   const services = [
     {
@@ -110,11 +110,11 @@ const Services = () => {
   ];
 
   const handleViewPhotos = (category: string) => {
-    navigate(`/service-gallery?category=${category}`);
+    navigateWithLoader(`/service-gallery?category=${category}`);
   };
 
   const handleBooking = () => {
-    navigate('/contact');
+    navigateWithLoader('/contact');
   };
 
   return (
