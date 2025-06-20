@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Camera, Calendar, MapPin, Users, Award, Heart, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,14 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
-import { useLoading } from '@/contexts/LoadingContext';
 import center from '@/assest/images/center.jpeg'; 
 import left from '@/assest/images/left.jpeg';
 import right from '@/assest/images/right.jpeg';
 
 const Home = () => {
   const [showBookingForm, setShowBookingForm] = useState(false);
-  const { setIsLoading } = useLoading();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -95,10 +92,7 @@ const Home = () => {
   ];
 
   const handleNavigation = (url: string) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      window.location.href = url;
-    }, 300);
+    window.location.href = url;
   };
 
   const handleBookingSubmit = () => {

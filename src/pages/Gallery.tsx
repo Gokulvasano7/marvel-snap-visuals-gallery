@@ -1,12 +1,9 @@
-
 import React, { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLoading } from '@/contexts/LoadingContext';
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const { setIsLoading } = useLoading();
 
   // Helper function to dynamically import service gallery images
   const importImage = (path: string) => {
@@ -18,6 +15,7 @@ const Gallery = () => {
     }
   };
 
+  // ... keep existing code (galleryImages array)
   const galleryImages = [
     // Wedding Images
     importImage('wedding/w1.jpeg'),
@@ -88,12 +86,10 @@ const Gallery = () => {
   ];
 
   const handleNavigation = (url: string) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      window.location.href = url;
-    }, 300);
+    window.location.href = url;
   };
 
+  // ... keep existing code (openLightbox, closeLightbox, nextImage, prevImage functions)
   const openLightbox = (index: number) => {
     setSelectedImage(index);
     document.body.style.overflow = 'hidden';
