@@ -3,12 +3,10 @@ import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { useLoading } from '@/contexts/LoadingContext';
 import studio from '@/assest/videos/studio.webm';
 
 const About = () => {
   const [isMuted, setIsMuted] = useState(true);
-  const { setIsLoading } = useLoading();
 
   const stats = [
     { number: '500+', label: 'Projects', icon: Camera },
@@ -19,40 +17,38 @@ const About = () => {
 
   const teamMembers = [
     {
-      name: 'Rajesh Kumar',
-      role: 'Lead Photographer',
-      description: 'With over 8 years of experience in wedding and portrait photography, Rajesh brings artistic vision and technical expertise to every shoot.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
-      instagram: '@rajesh_marvelsnaps'
+      name: 'Thirukumaran Giriswaran',
+      role: 'CEO of Marvel Snaps',
+      description: 'With over 8 years of experience in wedding and portrait photography, Thirukumaran brings artistic vision and technical expertise to every shoot.',
+      image: '/lovable-uploads/1a69b8d2-75ff-4a8e-aff7-ea3987e03a9a.png',
+      instagram: '@man__with_cam'
     },
     {
-      name: 'Priya Sharma',
-      role: 'Creative Director',
-      description: 'Priya specializes in conceptual photography and videography, creating stunning visual narratives that capture emotions.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b69c?w=400',
-      instagram: '@priya_creative'
-    },
-    {
-      name: 'Arjun Patel',
-      role: 'Drone Specialist',
-      description: 'Expert in aerial photography and cinematography, Arjun captures breathtaking perspectives from above.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400',
-      instagram: '@arjun_aerials'
+      name: 'Kaviyaraj Nagaraj',
+      role: 'Creative Advisor',
+      description: 'Kaviyaraj specializes in conceptual photography and videography, creating stunning visual narratives that capture emotions.',
+      image: '/lovable-uploads/1a62e6ff-240d-4835-90c7-7b223e396c0d.png',
+      instagram: null
     }
   ];
 
   const additionalTeam = [
-    { name: 'Sneha Reddy', role: 'Event Photographer', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300' },
-    { name: 'Vikram Singh', role: 'Video Editor', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300' },
-    { name: 'Meera Joshi', role: 'Assistant Photographer', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300' }
+    { 
+      name: 'Fazrul Hak Abdulkaboor', 
+      role: 'Marketing Head', 
+      image: '/lovable-uploads/76ad98ad-6436-49d8-8741-962b59677db3.png' 
+    },
+    { 
+      name: 'Nirmal Abdullah Abdul Rahman', 
+      role: 'Accounts Department', 
+      image: '/lovable-uploads/a1820606-c99b-4831-a578-9fa6bcef3fa3.png' 
+    },
+    { 
+      name: 'Gokul vasan B', 
+      role: 'Assistant Photographer', 
+      image: '/lovable-uploads/5dcb000c-6271-44b9-8999-566dcd6fb8d8.png' 
+    }
   ];
-
-  const handleNavigation = (url: string) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      window.location.href = url;
-    }, 300);
-  };
 
   return (
     <div className="min-h-screen pt-20">
@@ -182,15 +178,17 @@ const About = () => {
                   <h3 className="text-3xl font-bold mb-2 text-black">{member.name}</h3>
                   <p className="text-xl text-marvel-yellow mb-4">{member.role}</p>
                   <p className="text-gray-600 mb-6 leading-relaxed">{member.description}</p>
-                  <a 
-                    href={`https://instagram.com/${member.instagram.substring(1)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 text-black hover:text-marvel-yellow transition-colors"
-                  >
-                    <Instagram className="h-5 w-5" />
-                    <span>{member.instagram}</span>
-                  </a>
+                  {member.instagram && (
+                    <a 
+                      href={`https://instagram.com/${member.instagram.substring(1)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 text-black hover:text-marvel-yellow transition-colors"
+                    >
+                      <Instagram className="h-5 w-5" />
+                      <span>{member.instagram}</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
