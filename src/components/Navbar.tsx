@@ -55,8 +55,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-black/30 backdrop-blur-lg border-b border-black/20 shadow-lg'
-          : 'bg-black/10 backdrop-blur-md border-b border-black/10'
+          ? 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg'
+          : 'bg-transparent backdrop-blur-sm'
       } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
       onMouseEnter={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}

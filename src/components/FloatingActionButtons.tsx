@@ -13,23 +13,23 @@ const FloatingActionButtons = () => {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex flex-col space-y-3">
+    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col space-y-3">
       {/* WhatsApp Button */}
       <Button
         onClick={handleWhatsApp}
-        className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        className="w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
         size="icon"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle className="h-8 w-8" />
       </Button>
 
       {/* Call Button */}
       <Button
         onClick={handleCall}
-        className="w-14 h-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        className="w-16 h-16 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
         size="icon"
       >
-        <Phone className="h-6 w-6" />
+        <Phone className="h-8 w-8" />
       </Button>
     </div>
   );
