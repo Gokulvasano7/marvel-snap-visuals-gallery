@@ -1,13 +1,12 @@
 
 import React from 'react';
 import { Camera } from 'lucide-react';
+import { useNavigation } from '@/contexts/NavigationContext';
 
-interface CameraLoaderProps {
-  isVisible: boolean;
-}
+const CameraLoader: React.FC = () => {
+  const { isLoading } = useNavigation();
 
-const CameraLoader: React.FC<CameraLoaderProps> = ({ isVisible }) => {
-  if (!isVisible) return null;
+  if (!isLoading) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white flex items-center justify-center">

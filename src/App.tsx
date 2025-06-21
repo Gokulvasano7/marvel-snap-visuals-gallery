@@ -13,17 +13,14 @@ import Services from '@/pages/Services';
 import ServiceGallery from '@/pages/ServiceGallery';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import { useNavigation } from '@/contexts/NavigationContext';
 import './App.css';
 
 const queryClient = new QueryClient();
 
 function AppContent() {
-  const { isLoading } = useNavigation();
-
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      {isLoading && <CameraLoader />}
+      <CameraLoader />
       <Navbar />
       <main>
         <Routes>
