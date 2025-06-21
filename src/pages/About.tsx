@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import Testimonials from '@/components/Testimonials';
 import studio from '@/assest/videos/studio.webm';
 
 const About = () => {
@@ -118,7 +118,7 @@ const About = () => {
             </div>
             <div className="order-1 lg:order-2">
               <img 
-                src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" 
+                src="/lovable-uploads/1062a8ed-c8c5-471b-86e8-f96695647fb1.png" 
                 alt="Our Story"
                 className="w-full max-w-md mx-auto rounded-lg shadow-2xl hover-lift"
               />
@@ -214,6 +214,9 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials showAll={true} title="Client Testimonials" />
     </div>
   );
 };

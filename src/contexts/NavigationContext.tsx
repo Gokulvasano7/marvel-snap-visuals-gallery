@@ -16,7 +16,7 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const navigateWithLoader = useCallback((path: string) => {
     setIsLoading(true);
     
-    // Show loader for 2 seconds
+    // Show loader for 1 second
     setTimeout(() => {
       // Navigate to the new page
       navigate(path);
@@ -26,7 +26,7 @@ export const NavigationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         setIsLoading(false);
       }, 100);
-    }, 2000);
+    }, 1000);
   }, [navigate]);
 
   return (

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
 import { useNavigation } from '@/contexts/NavigationContext';
+import Testimonials from '@/components/Testimonials';
 import center from '@/assest/images/center.jpeg'; 
 import left from '@/assest/images/left.jpeg';
 import right from '@/assest/images/right.jpeg';
@@ -262,6 +263,9 @@ Additional Message: ${formData.message}`;
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Booking CTA */}
       <section className="py-20 bg-marvel-black text-white">

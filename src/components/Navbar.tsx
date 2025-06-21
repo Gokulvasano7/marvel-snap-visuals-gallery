@@ -55,8 +55,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-white/90 backdrop-blur-sm'
+          ? 'bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg'
+          : 'bg-white/5 backdrop-blur-md border-b border-white/10'
       } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
       onMouseEnter={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
@@ -68,10 +68,10 @@ const Navbar = () => {
             onClick={() => handleNavigation('/')}
             className="flex items-center space-x-2 hover:scale-105 transition-transform duration-300"
           >
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-marvel-yellow rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-marvel-yellow rounded-lg flex items-center justify-center shadow-lg">
               <span className="font-bold text-lg md:text-xl text-black">M</span>
             </div>
-            <span className="text-lg md:text-xl font-bold text-black">Marvel Snaps</span>
+            <span className="text-lg md:text-xl font-bold text-white drop-shadow-lg">Marvel Snaps</span>
           </button>
 
           {/* Desktop Navigation */}
@@ -83,7 +83,7 @@ const Navbar = () => {
                 className={`relative text-sm font-medium transition-colors duration-300 hover:text-marvel-yellow ${
                   location.pathname === item.href
                     ? 'text-marvel-yellow'
-                    : 'text-black'
+                    : 'text-white drop-shadow-md'
                 } after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-marvel-yellow after:transform after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                   location.pathname === item.href ? 'after:scale-x-100' : ''
                 }`}
@@ -97,11 +97,11 @@ const Navbar = () => {
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-black">
+                <Button variant="ghost" size="icon" className="text-white">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
+              <SheetContent side="right" className="w-80 bg-white/95 backdrop-blur-lg">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between py-4">
                     <button
