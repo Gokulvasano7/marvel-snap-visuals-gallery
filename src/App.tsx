@@ -19,10 +19,10 @@ const queryClient = new QueryClient();
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-background font-sans antialiased">
+    <div className="min-h-screen bg-background font-sans antialiased w-full">
       <CameraLoader />
       <Navbar />
-      <main>
+      <main className="w-full">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
