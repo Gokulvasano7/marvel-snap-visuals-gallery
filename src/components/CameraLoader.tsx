@@ -43,18 +43,6 @@ const CameraLoader: React.FC<CameraLoaderProps> = ({ isVisible }) => {
         {/* Flash Overlay */}
         <div className="fixed inset-0 bg-white pointer-events-none opacity-0 animate-flash"></div>
       </div>
-      
-      <style jsx>{`
-        @keyframes flash {
-          0%, 90% { opacity: 0; }
-          95% { opacity: 0.8; }
-          100% { opacity: 0; }
-        }
-        
-        .animate-flash {
-          animation: flash 2s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };
