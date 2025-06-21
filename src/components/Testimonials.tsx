@@ -1,8 +1,9 @@
 
-import React from 'react';
-import { Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem, CarouselApi } from '@/components/ui/carousel';
 
 interface Testimonial {
   id: number;
@@ -96,6 +97,30 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
 
 const Testimonials: React.FC<TestimonialsProps> = ({ showAll = false, title = "What Our Clients Say" }) => {
   const displayTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
+
+  const scrollPrev = () => {
+    api?.scrollPrev();
+  };
+
+  const scrollNext = () => {
+    api?.scrollNext();
+  };
 
   return (
     <section className="py-20 bg-gray-50">
@@ -111,7 +136,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAll = false, title = "W
 
         {/* Mobile Carousel */}
         <div className="md:hidden">
-          <Carousel className="w-full max-w-sm mx-auto">
+          <Carousel setApi={setApi} className="w-full max-w-sm mx-auto">
             <CarouselContent>
               {displayTestimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id}>
@@ -119,9 +144,32 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAll = false, title = "W
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
           </Carousel>
+          
+          {/* Mobile Navigation Buttons */}
+          <div className="flex items-center justify-center space-x-4 mt-6">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollPrev}
+              disabled={current === 1}
+              className="h-8 w-8"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <span className="text-sm text-gray-600">
+              {current} of {count}
+            </span>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollNext}
+              disabled={current === count}
+              className="h-8 w-8"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
 
         {/* Desktop Grid */}

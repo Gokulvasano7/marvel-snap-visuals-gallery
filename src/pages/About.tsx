@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -202,7 +203,7 @@ const About = () => {
                   <img 
                     src={member.image} 
                     alt={member.name}
-                    className="w-full h-64 object-cover rounded-t-lg"
+                    className="w-full h-80 object-cover rounded-t-lg"
                   />
                   <div className="p-6 text-center">
                     <h4 className="text-xl font-semibold mb-2">{member.name}</h4>
