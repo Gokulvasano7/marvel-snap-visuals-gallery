@@ -133,7 +133,8 @@ const Gallery = () => {
       autoDragRef.current = setInterval(() => {
         // Simulate wheel scroll for auto-drag
         const wheelEvent = new WheelEvent('wheel', {
-          deltaY: 10,
+          deltaY: 5,
+          deltaX: 2,
           bubbles: true,
           cancelable: true
         });
