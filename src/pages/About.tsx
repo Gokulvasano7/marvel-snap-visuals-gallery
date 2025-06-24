@@ -52,7 +52,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero Video Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <video 

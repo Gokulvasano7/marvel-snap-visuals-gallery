@@ -15,6 +15,8 @@ const Navbar = () => {
   const location = useLocation();
   const { navigateWithLoader } = useNavigation();
 
+  const isHomePage = location.pathname === '/';
+
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -51,13 +53,20 @@ const Navbar = () => {
     navigateWithLoader(href);
   };
 
+  // Different navbar background based on page and scroll state
+  const getNavbarBackground = () => {
+    if (isHomePage) {
+      return isScrolled 
+        ? 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg'
+        : 'bg-white/20 backdrop-blur-sm';
+    } else {
+      return 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg';
+    }
+  };
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg'
-          : 'bg-transparent backdrop-blur-sm'
-      } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${getNavbarBackground()} ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}
       onMouseEnter={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
     >
