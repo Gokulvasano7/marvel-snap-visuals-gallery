@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Play, Volume2, VolumeX, Instagram, Award, Users, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import Testimonials from '@/components/Testimonials';
+import { StaggerTestimonials } from '@/components/ui/stagger-testimonials';
 import studio from '@/assest/videos/studio.webm';
 
 const About = () => {
@@ -216,8 +215,20 @@ const About = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <Testimonials showAll={true} title="Client Testimonials" />
+      {/* Client Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+              Client Testimonials
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Hear from our satisfied clients about their amazing experiences with Marvel Snaps
+            </p>
+          </div>
+          <StaggerTestimonials />
+        </div>
+      </section>
     </div>
   );
 };

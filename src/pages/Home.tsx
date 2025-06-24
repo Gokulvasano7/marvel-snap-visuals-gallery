@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Camera, Calendar, MapPin, Users, Award, Heart, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
 import { useNavigation } from '@/contexts/NavigationContext';
-import Testimonials from '@/components/Testimonials';
+import { StaggerTestimonials } from '@/components/ui/stagger-testimonials';
 import center from '@/assest/images/center.jpeg'; 
 import left from '@/assest/images/left.jpeg';
 import right from '@/assest/images/right.jpeg';
@@ -265,7 +266,19 @@ Additional Message: ${formData.message}`;
       </section>
 
       {/* Testimonials Section */}
-      <Testimonials />
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+              What Our Clients Say
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Hear from our satisfied clients about their amazing experiences with Marvel Snaps
+            </p>
+          </div>
+          <StaggerTestimonials />
+        </div>
+      </section>
 
       {/* Booking CTA */}
       <section className="py-20 bg-marvel-black text-white">

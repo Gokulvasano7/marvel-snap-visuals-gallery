@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { 
@@ -10,6 +10,11 @@ import {
 
 const Gallery = () => {
   const { navigateWithLoader } = useNavigation();
+  const [isManuallyDragged, setIsManuallyDragged] = useState(false);
+  const [showCallToAction, setShowCallToAction] = useState(true);
+  const [subtitleVisible, setSubtitleVisible] = useState(false);
+  const autoDragRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Helper function to dynamically import service gallery images
   const importImage = (path: string) => {
@@ -94,55 +99,121 @@ const Gallery = () => {
     navigateWithLoader(url);
   };
 
+  const handleManualDrag = () => {
+    setIsManuallyDragged(true);
+    setShowCallToAction(false);
+    
+    // Clear existing timeouts
+    if (autoDragRef.current) {
+      clearInterval(autoDragRef.current);
+    }
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    
+    // Resume auto-drag after 3 seconds
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsManuallyDragged(false);
+      setShowCallToAction(true);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    // Fade in subtitle after 5 seconds
+    const subtitleTimeout = setTimeout(() => {
+      setSubtitleVisible(true);
+    }, 5000);
+
+    return () => clearTimeout(subtitleTimeout);
+  }, []);
+
+  useEffect(() => {
+    // Auto-drag functionality
+    if (!isManuallyDragged) {
+      autoDragRef.current = setInterval(() => {
+        // Simulate wheel scroll for auto-drag
+        const wheelEvent = new WheelEvent('wheel', {
+          deltaY: 50,
+          bubbles: true,
+          cancelable: true
+        });
+        window.dispatchEvent(wheelEvent);
+      }, 100); // Very slow and smooth
+    }
+
+    return () => {
+      if (autoDragRef.current) {
+        clearInterval(autoDragRef.current);
+      }
+    };
+  }, [isManuallyDragged]);
+
+  useEffect(() => {
+    return () => {
+      if (autoDragRef.current) {
+        clearInterval(autoDragRef.current);
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
       <section className="absolute top-0 left-0 right-0 z-10 py-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white glow-text">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 text-white glow-text">
             Our Masterpiece Collection
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className={`text-base text-gray-300 max-w-2xl mx-auto transition-opacity duration-1000 ${
+            subtitleVisible ? 'opacity-100' : 'opacity-0'
+          }`}>
             Drag to explore our stunning photography portfolio
           </p>
         </div>
       </section>
 
       {/* Draggable Gallery */}
-      <DraggableContainer variant="masonry">
-        <GridBody>
-          {galleryImages.map((image, index) => (
-            <GridItem
-              key={index}
-              className="relative h-48 w-32 sm:h-64 sm:w-40 md:h-96 md:w-64"
-            >
-              <img
-                src={image}
-                alt={`Gallery ${index + 1}`}
-                className="pointer-events-none absolute h-full w-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/placeholder.svg';
-                }}
-              />
-            </GridItem>
-          ))}
-        </GridBody>
-      </DraggableContainer>
+      <div onMouseDown={handleManualDrag} onTouchStart={handleManualDrag}>
+        <DraggableContainer variant="masonry">
+          <GridBody>
+            {galleryImages.map((image, index) => (
+              <GridItem
+                key={index}
+                className="relative h-48 w-32 sm:h-64 sm:w-40 md:h-96 md:w-64"
+              >
+                <img
+                  src={image}
+                  alt={`Gallery ${index + 1}`}
+                  className="pointer-events-none absolute h-full w-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/placeholder.svg';
+                  }}
+                />
+              </GridItem>
+            ))}
+          </GridBody>
+        </DraggableContainer>
+      </div>
 
       {/* Call to Action - Fixed at bottom */}
-      <div className="fixed bottom-6 left-6 right-6 z-10 pointer-events-auto">
-        <div className="bg-black/80 backdrop-blur-lg rounded-lg p-4 text-center border border-gray-800">
-          <p className="text-sm md:text-base text-gray-300 mb-3">
-            Like what you see? Let's create something beautiful together
-          </p>
-          <Button 
-            onClick={() => handleNavigation('/contact')}
-            className="bg-marvel-yellow text-black hover:bg-yellow-400 px-6 py-2 text-sm md:text-base"
-          >
-            Get in Touch
-          </Button>
+      {showCallToAction && (
+        <div className="fixed bottom-6 left-6 right-6 z-10 pointer-events-auto transition-opacity duration-500">
+          <div className="bg-black/80 backdrop-blur-lg rounded-lg p-4 text-center border border-gray-800">
+            <p className="text-sm md:text-base text-gray-300 mb-3">
+              Like what you see? Let's create something beautiful together
+            </p>
+            <Button 
+              onClick={() => handleNavigation('/contact')}
+              className="bg-marvel-yellow text-black hover:bg-yellow-400 px-6 py-2 text-sm md:text-base"
+            >
+              Get in Touch
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
