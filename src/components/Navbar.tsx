@@ -58,7 +58,7 @@ const Navbar = () => {
     if (isHomePage) {
       return isScrolled 
         ? 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg'
-        : 'bg-white/20 backdrop-blur-sm';
+        : 'bg-white/2 backdrop-blur-sm';
     } else {
       return 'bg-black/50 backdrop-blur-lg border-b border-black/30 shadow-lg';
     }
