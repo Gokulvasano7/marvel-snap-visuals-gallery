@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigation } from '@/contexts/NavigationContext';
+import { 
+  GridBody,
+  DraggableContainer,
+  GridItem, 
+} from '@/components/ui/infinite-drag-scroll';
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const { navigateWithLoader } = useNavigation();
 
   // Helper function to dynamically import service gallery images
@@ -17,7 +21,6 @@ const Gallery = () => {
     }
   };
 
-  // ... keep existing code (galleryImages array)
   const galleryImages = [
     // Wedding Images
     importImage('wedding/w1.jpeg'),
@@ -91,137 +94,55 @@ const Gallery = () => {
     navigateWithLoader(url);
   };
 
-  // ... keep existing code (openLightbox, closeLightbox, nextImage, prevImage functions)
-  const openLightbox = (index: number) => {
-    setSelectedImage(index);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeLightbox = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'unset';
-  };
-
-  const nextImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % galleryImages.length);
-    }
-  };
-
-  const prevImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? galleryImages.length - 1 : selectedImage - 1);
-    }
-  };
-
   return (
-    <div className="min-h-screen pt-20 bg-gray-50">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <section className="py-16 bg-white">
+      <section className="absolute top-0 left-0 right-0 z-10 py-20 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-black">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 text-white glow-text">
             Our Masterpiece Collection
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Where Every Frame Tells a Story
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Drag to explore our stunning photography portfolio
           </p>
         </div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
-              <div 
-                key={index}
-                className="group relative overflow-hidden rounded-lg cursor-pointer hover-lift"
-                onClick={() => openLightbox(index)}
-              >
-                <img 
-                  src={image} 
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/placeholder.svg';
-                  }}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-12 h-12 bg-marvel-yellow rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7l3 3-3 3" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Draggable Gallery */}
+      <DraggableContainer variant="masonry">
+        <GridBody>
+          {galleryImages.map((image, index) => (
+            <GridItem
+              key={index}
+              className="relative h-48 w-32 sm:h-64 sm:w-40 md:h-96 md:w-64"
+            >
+              <img
+                src={image}
+                alt={`Gallery ${index + 1}`}
+                className="pointer-events-none absolute h-full w-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/placeholder.svg';
+                }}
+              />
+            </GridItem>
+          ))}
+        </GridBody>
+      </DraggableContainer>
 
-      {/* Lightbox */}
-      {selectedImage !== null && (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
-          <Button
-            onClick={closeLightbox}
-            className="absolute top-4 right-4 bg-white/20 text-white hover:bg-white/30"
-            size="icon"
-          >
-            <X className="h-6 w-6" />
-          </Button>
-
-          <Button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 text-white hover:bg-white/30"
-            size="icon"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </Button>
-
-          <Button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 text-white hover:bg-white/30"
-            size="icon"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </Button>
-
-          <div className="max-w-5xl max-h-[90vh] px-4">
-            <img 
-              src={galleryImages[selectedImage]} 
-              alt={`Gallery ${selectedImage + 1}`}
-              className="max-w-full max-h-full object-contain rounded-lg"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/placeholder.svg';
-              }}
-            />
-          </div>
-
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white">
-            {selectedImage + 1} / {galleryImages.length}
-          </div>
-        </div>
-      )}
-
-      {/* Call to Action */}
-      <section className="py-16 bg-marvel-black text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Like What You See?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Let's create something beautiful together for your special occasion
+      {/* Call to Action - Fixed at bottom */}
+      <div className="fixed bottom-6 left-6 right-6 z-10 pointer-events-auto">
+        <div className="bg-black/80 backdrop-blur-lg rounded-lg p-4 text-center border border-gray-800">
+          <p className="text-sm md:text-base text-gray-300 mb-3">
+            Like what you see? Let's create something beautiful together
           </p>
           <Button 
             onClick={() => handleNavigation('/contact')}
-            className="bg-marvel-yellow text-black hover:bg-yellow-400 px-8 py-3"
+            className="bg-marvel-yellow text-black hover:bg-yellow-400 px-6 py-2 text-sm md:text-base"
           >
             Get in Touch
           </Button>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
